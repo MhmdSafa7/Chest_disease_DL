@@ -1,92 +1,64 @@
-readme_content = """
-# Chest X-ray Image Classification
+# 🩻 Chest X-Ray Pneumonia Detection
 
-This notebook demonstrates a deep learning approach to classify chest X-ray images as either "NORMAL" or "PNEUMONIA". It utilizes a Convolutional Neural Network (CNN) built with TensorFlow and Keras, employing transfer learning with a pre-trained MobileNetV2 model.
+This project uses a **Convolutional Neural Network (CNN)** to classify chest X-ray images as **Normal** or **Pneumonia**.
 
-## Dataset
+---
 
-The dataset used for this project consists of chest X-ray images categorized into 'NORMAL' and 'PNEUMONIA' classes. The data is split into training, validation, and testing sets. You can find the dataset on Kaggle: [https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
+## 📂 Dataset
+The dataset is publicly available on **Kaggle**:
 
-- **Training Set:** Contains the majority of the images and is used to train the model.
-- **Validation Set:** A smaller set used to evaluate the model's performance during training and tune hyperparameters.
-- **Test Set:** An independent set used to assess the final model's performance after training.
+👉 [Chest X-Ray Pneumonia Dataset](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
 
-The class distribution is as follows:
+It contains:
+- **Train set:** X-ray images for model training  
+- **Test set:** Images for final evaluation  
+- **Validation set:** For tuning the model  
 
-| Set       | Class     | Count |
-|-----------|-----------|-------|
-| train     | PNEUMONIA | 3875  |
-| train     | NORMAL    | 1341  |
-| val       | PNEUMONIA | 8     |
-| val       | NORMAL    | 8     |
-| test      | PNEUMONIA | 390   |
-| test      | NORMAL    | 234   |
+---
 
-## Model Architecture
+## 🧠 Model Architecture
+We start with a custom CNN, then improve performance using **MobileNetV2** (transfer learning).
 
-The model uses transfer learning with a pre-trained MobileNetV2 model as the base. The output layer of MobileNetV2 is replaced with a custom head for binary classification.
+**Model Layers:**
+- Conv2D → MaxPooling  
+- Conv2D → MaxPooling  
+- Flatten → Dense → Dropout  
+- Output (Sigmoid activation)
 
-- **Base Model:** MobileNetV2 (pre-trained on ImageNet) with `include_top=False`
-- **Global Average Pooling:** Applied to the output of the base model to reduce dimensionality.
-- **Dense Layers:** One dense layer with ReLU activation followed by a dense layer with softmax activation for binary classification.
-- **Optimizer:** Adam
-- **Loss Function:** Categorical Crossentropy
+---
 
-## Data Augmentation
+## ⚙️ Preprocessing Steps
+- Resize images to **224×224**
+- Normalize pixel values (0–1)
+- Apply data augmentation (rotation, zoom, flip)
 
-Data augmentation is applied to the training set to increase the diversity of the data and help the model generalize better. The following augmentations are used:
+---
 
-- Rescaling pixel values
-- Random rotation
-- Random width and height shifts
-- Random zoom
-- Horizontal flipping
-- Shear transformation
-- Filling empty pixels with the nearest value
+## 🎯 Evaluation
+We used:
+- Accuracy, Precision, Recall, F1-score  
+- Confusion Matrix visualization  
+- Training vs Validation curves  
 
-## Training
+---
 
-The model is trained for 10 epochs using the augmented training data and evaluated on the validation set. Class weights are used to handle the class imbalance in the training data.
+## 🚀 Results
+| Metric | Score |
+|---------|--------|
+| Accuracy | 0.50 (Initial CNN) |
+| Improved (MobileNetV2) | *Expected 90%+* |
 
-## Evaluation
+---
 
-The model's performance is evaluated on the validation set using the following metrics:
+## 🧩 Tools Used
+- Python 3  
+- TensorFlow / Keras  
+- NumPy, Matplotlib, Seaborn  
+- Google Colab  
+- Kaggle Dataset  
 
-- **Accuracy:** The percentage of correctly classified images.
-- **Loss:** The value of the loss function, indicating how well the model is performing.
-- **Confusion Matrix:** A table showing the number of true positive, true negative, false positive, and false negative predictions.
-- **Classification Report:** Provides precision, recall, and F1-score for each class.
+---
 
-## Results
-
-Based on the validation set evaluation:
-
-- **Validation Accuracy:** 0.8750
-- **Validation Loss:** 0.2258
-
-The confusion matrix and classification report provide a more detailed breakdown of the model's performance on each class.
-
-## Usage
-
-To run this notebook:
-
-1. Mount your Google Drive.
-2. Ensure the chest X-ray dataset is organized in the specified directory structure within your Drive.
-3. Run the code cells sequentially.
-
-## Dependencies
-
-- TensorFlow
-- Keras
-- NumPy
-- Pandas
-- Matplotlib
-- Seaborn
-- Scikit-learn
-- OpenCV
-"""
-
-with open("README.md", "w") as f:
-    f.write(readme_content)
-
-print("README.md created successfully!")
+## 👨‍💻 Author
+**Mhmd Safa**  
+Deep Learning Research | Image Classification | Model Deployment
